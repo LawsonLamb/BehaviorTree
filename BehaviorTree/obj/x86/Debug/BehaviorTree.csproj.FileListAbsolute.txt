@@ -1,0 +1,5 @@
+C:\Users\Ninja\Desktop\BehaviorTree\BehaviorTree\obj\x86\Debug\BehaviorTree.csprojResolveAssemblyReference.cache
+C:\Users\Ninja\Desktop\BehaviorTree\BehaviorTree\bin\Debug\BehaviorTree.exe
+C:\Users\Ninja\Desktop\BehaviorTree\BehaviorTree\bin\Debug\BehaviorTree.pdb
+C:\Users\Ninja\Desktop\BehaviorTree\BehaviorTree\obj\x86\Debug\BehaviorTree.exe
+C:\Users\Ninja\Desktop\BehaviorTree\BehaviorTree\obj\x86\Debug\BehaviorTree.pdb
