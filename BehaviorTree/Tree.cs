@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 using System.Xml;
 namespace BehaviorTree
 {
+    enum SearchType
+    {
+        BreadthFirst,
+        DepthFirst,
+        MySearch,
+        None,
+    }
     class Tree
     {
         // public Node<Behavior> root;
@@ -114,7 +121,7 @@ namespace BehaviorTree
 
         }
 
-        public void traverse(Behavior child)
+         void traverse(Behavior child)
         {
             Console.WriteLine(child.ToString());
             if (child.HasChild)
@@ -132,21 +139,118 @@ namespace BehaviorTree
 
         }
 
-        public void Search(String Behavior)
+        Behavior BreadthFirst_Search(string Value)
         {
 
-            Behavior result = search(root,Behavior);
-            if (result != null)
+            Console.WriteLine("\n\tBREADTH FIRST SEARCH FOR: " + Value);
+            Queue<Behavior> q = new Queue<Behavior>();
+            q.Enqueue(root);
+            while (q.Count > 0)
             {
-             Console.WriteLine("RESULT: "+ result);
+                Behavior current = q.Dequeue();
 
+                Console.WriteLine("\t\t"+current);
+                if(current == null)
+                {
+
+                    continue;
+                }
+                if( current.behavior == Value)
+                {
+                    return current;
+
+                }
+                if (current.HasChild)
+                {
+                    foreach(Behavior b in current.Children)
+                    {
+                        q.Enqueue(b);
+                    }
+                }
+
+
+                
+               
             }
-            
-           
+            return null;
+        }
+        Behavior DepthFirst_Search(string Value)
+        {
 
+            Console.WriteLine("\tDEPTH FIRST SEARCH FOR: " + Value);
+            Stack<Behavior> s = new Stack<Behavior>();
 
+            s.Push(root);
+
+            while (s.Count > 0)
+            {
+                Behavior current = s.Pop();
+                Console.WriteLine("\t\t" + current);
+                if (current == null)
+                {
+
+                    continue;
+                }
+                if (current.behavior == Value)
+                {
+                    return current;
+
+                }
+                if (current.HasChild)
+                {
+                    {
+                        foreach (Behavior b in current.Children)
+                        {
+
+                            s.Push(b);
+                        }
+                    }
+                }
+
+               
+            }
+            return null;
         }
 
+        public void Search(String Behavior, SearchType type)
+        {
+            Behavior result;
+            switch (type)
+            {
+                case SearchType.BreadthFirst:
+                    result = BreadthFirst_Search(Behavior);
+                    if (result != null)
+                    {
+                        Console.WriteLine("RESULT: " + result);
+
+                    }
+                    break;
+
+                case SearchType.DepthFirst:
+                    result = DepthFirst_Search(Behavior);
+                    if (result != null)
+                    {
+                        Console.WriteLine("RESULT: " + result);
+
+                    }
+                    break;
+
+                case SearchType.MySearch:
+                    result = search(root, Behavior);
+                    if (result != null)
+                    {
+                        Console.WriteLine("RESULT: " + result);
+
+                    }
+                    break;
+
+
+
+            }
+         
+         
+
+        }
 
         Behavior search(Behavior child,string Value)
         {
