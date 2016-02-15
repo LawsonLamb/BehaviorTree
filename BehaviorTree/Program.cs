@@ -6,7 +6,10 @@ namespace BehaviorTree
 	{
 		public static void Main (string[] args)
 		{
-            Tree tree = new Tree();
+           /// Tree tree = new Tree();
+			MyXML xml = new MyXML (@"Tree.xml");
+			xml.Read ();
+			/*
             tree.BuildTreeManually();
             tree.Print();
 
@@ -24,8 +27,8 @@ namespace BehaviorTree
             tree.Search("Melee", SearchType.DepthFirst);
             tree.Search("Ranged", SearchType.DepthFirst);
             tree.Search("BREAK", SearchType.DepthFirst);
-
-
+		*/
+		
             Console.ReadLine();
         }
 

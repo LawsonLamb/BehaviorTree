@@ -36,6 +36,7 @@ namespace BehaviorTree
 
                 switch (reader.NodeType)
                 {
+						
                     case XmlNodeType.Element: // The node is an element.
                                               // Console.Write("<" + reader.Name);
                         string attribute = reader["behavior"];
@@ -139,6 +140,27 @@ namespace BehaviorTree
 
         }
 
+
+
+		Behavior Response(Behavior parent){
+
+
+
+			if (parent.HasChild) {
+
+				Random ran = new Random ();
+				int num = 	ran.Next (parent.Children.Count);
+
+				return parent.Children [num];
+
+			}
+
+			return null;
+
+
+		}
+
+
         Behavior BreadthFirst_Search(string Value)
         {
 
@@ -177,7 +199,7 @@ namespace BehaviorTree
         Behavior DepthFirst_Search(string Value)
         {
 
-            Console.WriteLine("\tDEPTH FIRST SEARCH FOR: " + Value);
+           Console.WriteLine("\tDEPTH FIRST SEARCH FOR: " + Value);
             Stack<Behavior> s = new Stack<Behavior>();
 
             s.Push(root);
@@ -185,7 +207,7 @@ namespace BehaviorTree
             while (s.Count > 0)
             {
                 Behavior current = s.Pop();
-                Console.WriteLine("\t\t" + current);
+               // Console.WriteLine("\t\t" + current);
                 if (current == null)
                 {
 
@@ -221,7 +243,9 @@ namespace BehaviorTree
                     result = BreadthFirst_Search(Behavior);
                     if (result != null)
                     {
-                        Console.WriteLine("RESULT: " + result);
+					result = Response (result);
+
+						Console.WriteLine("RESULT: " + result.response);
 
                     }
                     break;
@@ -229,8 +253,8 @@ namespace BehaviorTree
                 case SearchType.DepthFirst:
                     result = DepthFirst_Search(Behavior);
                     if (result != null)
-                    {
-                        Console.WriteLine("RESULT: " + result);
+					{ 	result = Response (result);
+                        Console.WriteLine("RESULT: " + result.response);
 
                     }
                     break;
@@ -238,8 +262,8 @@ namespace BehaviorTree
                 case SearchType.MySearch:
                     result = search(root, Behavior);
                     if (result != null)
-                    {
-                        Console.WriteLine("RESULT: " + result);
+					{		result = Response (result);
+                        Console.WriteLine("RESULT: " + result.response);
 
                     }
                     break;
@@ -267,7 +291,7 @@ namespace BehaviorTree
                     Behavior temp = search(b, Value);
                     if (temp != null)
                     {
-                        Console.WriteLine(temp);
+                       // Console.WriteLine(temp);
                         if (temp.behavior == Value)
                         {
                        
